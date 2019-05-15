@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>情報編集</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center align-items-center"
+			style="height: 100vh">
+			<div class="col-4">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">更新</h4>
+						<form th:action="@{/update/id={id}(id=${user.id})}" method="post"
+							autocomplete="off">
+							<div class="form-group">
+								<input type="number" class="form-control" name="id"
+									placeholder="Enter your new ID" autofocus required>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="username"
+									placeholder="Enter your new UserName" required>
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" name="password"
+									placeholder="Enter your new Password" required>
+							</div>
+							<div class="form-group">
+								<button type="submit" id="sendlogin" class="btn btn-primary">Update</button>
+								<a class="btn btn-link" th:href="@{/}">一覧へ戻る</a>
+							</div>
+						</form>
+						<div th:if="${error}" class="alert alert-danger">
+							<label>既に登録済みのIDです。<br>別のを利用してください
+							</label>
+						</div>
+						<div th:if="${inputError}" class="alert alert-danger">
+							<label>社員番号は0以上です</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
