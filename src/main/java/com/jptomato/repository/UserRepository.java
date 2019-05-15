@@ -28,7 +28,7 @@ public interface UserRepository {
 	@Insert("insert into user values(#{id},#{username},#{password})")
 	public void insert(User user);
 
-	@Update("update user set id=#{id}, username=#{username}, password=#{password}")
+	@Update("update user set id=#{id}, username=#{username}, password=#{password} where id=#{id}")
 	public void update(User user);
 
 	@Delete("delete from user where id=#{id}")

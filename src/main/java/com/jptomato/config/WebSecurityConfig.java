@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.loginPage("/login")
 				.loginProcessingUrl("/authenticate")
-				.usernameParameter("username")
+				.usernameParameter("id")
 				.passwordParameter("password")
 				.defaultSuccessUrl("/", true)
 				.permitAll();
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
 

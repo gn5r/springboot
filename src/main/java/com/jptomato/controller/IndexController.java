@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.jptomato.entity.User;
 import com.jptomato.repository.UserRepository;
@@ -25,13 +24,6 @@ public class IndexController {
 	public String index(Model model) {
 		model.addAttribute("list", repository.selectList());
 		return "index";
-	}
-
-	@PostMapping("/")
-	public String post(User user, Model model) {
-		repository.insert(user);
-		model.addAttribute("list", repository.selectList());
-		return "redirect:/";
 	}
 
 	@GetMapping("/delete/{id}")

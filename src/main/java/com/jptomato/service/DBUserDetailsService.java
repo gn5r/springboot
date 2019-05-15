@@ -22,8 +22,8 @@ public class DBUserDetailsService implements UserDetailsService {
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = repository.findByName(username);
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+		User user = repository.findById(Integer.parseInt(id));
 		if(user == null) {
 			throw new UsernameNotFoundException("user not found");
 		}

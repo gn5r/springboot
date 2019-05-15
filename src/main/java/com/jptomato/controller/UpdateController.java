@@ -40,17 +40,11 @@ public class UpdateController {
 	public String showForm(@Valid User user, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			model.addAttribute("inputError", true);
 			return "register";
 		}
 
-		if (overlapCheck(user)) {
-			model.addAttribute("error", true);
-			return "update";
-		} else {
-			reposirtoy.update(user);
-			return "redirect:/";
-		}
+		reposirtoy.update(user);
+		return "redirect:/";
 	}
 
 	/*    入力されたIDの重複チェック    */

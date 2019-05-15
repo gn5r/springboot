@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ public class RegisterController {
 	@Autowired
 	private UserRepository reposirtoy;
 
+	@Autowired
+	MessageSource source;
+
 	@ModelAttribute
 	public User getUser() {
 		return new User();
@@ -28,14 +32,14 @@ public class RegisterController {
 
 	@GetMapping("/register")
 	public String register(Model model) {
+		model.addAttribute("user", new User());
 		return "register";
 	}
 
 	@PostMapping("/register")
 	public String showForm(@Valid User user, BindingResult result, Model model) {
 
-		if(result.hasErrors()) {
-			model.addAttribute("inputError", true);
+		if (result.hasErrors()) {
 			return "register";
 		}
 

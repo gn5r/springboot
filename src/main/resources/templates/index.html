@@ -24,7 +24,7 @@
 
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="btn btn-primary"
-					th:href="@{/logout}">ログアウト</a></li>
+					th:href="@{/logout}">Logout</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -47,8 +47,8 @@
 						<td th:text="${user.id}">xx</td>
 						<td th:text="${user.username}">xx</td>
 						<td th:text="${user.password}">xx</td>
-						<td><a th:href="@{/update/id={id}(id=${user.id})}" class="btn btn-link">編集</a>
-							<a class="btn btn-link" id="deleteItem"
+						<td><a th:href="@{/update/id={id}(id=${user.id})}" class="btn btn-info">編集</a>
+							<a class="btn btn-info" id="deleteItem"
 							th:href="@{/delete/{id}(id=${user.id})}" onclick="deleteItem();return false;">削除</a>
 						</td>
 					</tr>
