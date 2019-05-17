@@ -20,7 +20,9 @@ import com.jptomato.repository.UserRepository;
 public class UpdateController {
 
 	@Autowired
-	private UserRepository reposirtoy;
+	private UserRepository repository;
+
+	private int oldId;
 
 	@ModelAttribute
 	public User getUser() {
@@ -29,8 +31,9 @@ public class UpdateController {
 
 	@GetMapping("/update/id={id}")
 	public String register(@PathVariable("id") int id, Model model) {
-		/*    URL Paramより編集するユーザー名から情報を取得    */
-		User user = reposirtoy.findById(id);
+		/*    URL Paramより編集するユーザーIDから情報を取得    */
+		User user = repository.findById(id);
+		this.oldId = user.getId();
 		model.addAttribute("user", user);
 		return "update";
 	}
@@ -40,22 +43,34 @@ public class UpdateController {
 	public String showForm(@Valid User user, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			return "register";
+			return "update";
 		}
 
-		reposirtoy.update(user);
+		if (overlapCheck(user)) {
+			model.addAttribute("error", true);
+			return "update";
+		}
+		repository.update(user.getId(), user.getUsername(), user.getPassword(), this.oldId);
 		return "redirect:/";
 	}
 
 	/*    入力されたIDの重複チェック    */
 	private boolean overlapCheck(User user) {
-		List<User> list = reposirtoy.selectList();
+		List<User> list = repository.selectList();
 
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getId() == user.getId()) {
-				return true;
+		/*    IDを変更するかどうかの判断    */
+		if (user.getId() == this.oldId) {
+			/*    IDは変更しない場合    */
+			return false;
+		} else {
+			/*    IDを変更する場合、重複してるかどうか    */
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getId() == user.getId()) {
+					return true;
+				}
 			}
 		}
+
 		return false;
 	}
 }

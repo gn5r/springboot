@@ -21,30 +21,32 @@
 						<form th:action="@{/register}" method="post" autocomplete="off"
 							th:object="${user}">
 							<div class="form-group">
-								<input type="number" class="form-control" name="id"
+								<input type="number" class="form-control" th:field="*{id}"
 									placeholder="Enter new account ID" autofocus required>
 								<p th:if="${#fields.hasErrors('id')}" th:errors="*{id}"
 									style="color: red">id Error</p>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="username"
+								<input type="text" class="form-control" th:field="*{username}"
 									placeholder="Enter new account UserName" required>
 								<p th:if="${#fields.hasErrors('username')}"
 									th:errors="*{username}" style="color: red">username Error</p>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" name="password"
-									placeholder="Enter new account Password" required>
+								<input type="password" class="form-control"
+									th:field="*{password}" placeholder="Enter new account Password"
+									required>
 								<p th:if="${#fields.hasErrors('password')}"
 									th:errors="*{password}" style="color: red">password Error</p>
 							</div>
 							<div class="form-group">
-								<button type="submit" id="sendlogin" class="btn btn-primary">Register</button>
+								<button type="submit" id="sendlogin" class="btn btn-primary"
+									onclick="$('#toast').toast('show')">Register</button>
 								<a class="btn btn-link" th:href="@{/}">一覧へ戻る</a>
 							</div>
 						</form>
 						<div th:if="${error}" class="alert alert-danger">
-							<label>既に登録済みのIDです</label>
+							<label>既に登録済みのIDです。</label>
 						</div>
 					</div>
 				</div>

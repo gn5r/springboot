@@ -46,10 +46,10 @@ public class RegisterController {
 		if (overlapCheck(user)) {
 			model.addAttribute("error", true);
 			return "register";
-		} else {
-			reposirtoy.insert(user);
-			return "redirect:/";
 		}
+
+		reposirtoy.insert(user);
+		return "redirect:/";
 	}
 
 	/*    登録するIDの重複チェック   *

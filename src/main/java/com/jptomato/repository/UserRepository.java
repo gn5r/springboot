@@ -23,13 +23,13 @@ public interface UserRepository {
 	public User findByName(@Param("username") String username);
 
 	@Select("select * from user where id=#{id}")
-	public User findById(@Param("id")int id);
+	public User findById(@Param("id") int id);
 
 	@Insert("insert into user values(#{id},#{username},#{password})")
 	public void insert(User user);
 
-	@Update("update user set id=#{id}, username=#{username}, password=#{password} where id=#{id}")
-	public void update(User user);
+	@Update("update user set id=#{id}, username=#{username}, password=#{password} where id=#{oldId}")
+	public void update(int id, String username, String password, int oldId);
 
 	@Delete("delete from user where id=#{id}")
 	public void delete(@Param("id") int id);
